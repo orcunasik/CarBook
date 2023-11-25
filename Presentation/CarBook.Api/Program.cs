@@ -7,8 +7,10 @@ using CarBook.Application.Features.CQRS.Handlers.BrandHandlers.Read;
 using CarBook.Application.Features.CQRS.Handlers.CarHandlers.Read;
 using CarBook.Application.Features.CQRS.Handlers.CarHandlers.Write;
 using CarBook.Application.Interfaces;
+using CarBook.Application.Interfaces.CarInterface;
 using CarBook.Persistence.Context;
 using CarBook.Persistence.Repositories;
+using CarBook.Persistence.Repositories.CarRepository;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -44,8 +46,10 @@ builder.Services.AddScoped<RemoveBrandCommandHandler>();
 #endregion
 
 #region CarHandlerServices
+builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<GetCarByIdQueryHandler>();
 builder.Services.AddScoped<GetCarQueryHandler>();
+builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
 builder.Services.AddScoped<CreateCarCommandHandler>();
 builder.Services.AddScoped<UpdateCarCommandHandler>();
 builder.Services.AddScoped<RemoveCarCommandHandler>();
