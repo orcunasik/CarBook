@@ -6,6 +6,8 @@ using CarBook.Application.Features.CQRS.Handlers.BrandHandlers;
 using CarBook.Application.Features.CQRS.Handlers.BrandHandlers.Read;
 using CarBook.Application.Features.CQRS.Handlers.CarHandlers.Read;
 using CarBook.Application.Features.CQRS.Handlers.CarHandlers.Write;
+using CarBook.Application.Features.CQRS.Handlers.CategoryHandlers.Read;
+using CarBook.Application.Features.CQRS.Handlers.CategoryHandlers.Write;
 using CarBook.Application.Interfaces;
 using CarBook.Application.Interfaces.CarInterface;
 using CarBook.Persistence.Context;
@@ -53,6 +55,14 @@ builder.Services.AddScoped<GetCarWithBrandQueryHandler>();
 builder.Services.AddScoped<CreateCarCommandHandler>();
 builder.Services.AddScoped<UpdateCarCommandHandler>();
 builder.Services.AddScoped<RemoveCarCommandHandler>();
+#endregion
+
+#region CategoryHandlerServices
+builder.Services.AddScoped<GetCategoryByIdQueryHandler>();
+builder.Services.AddScoped<GetCategoryQueryHandler>();
+builder.Services.AddScoped<CreateCategoryCommandHandler>();
+builder.Services.AddScoped<UpdateCategoryCommandHandler>();
+builder.Services.AddScoped<RemoveCategoryCommandHandler>();
 #endregion
 
 WebApplication app = builder.Build();
