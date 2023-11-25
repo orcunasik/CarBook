@@ -12,14 +12,16 @@ public class CarsController : ControllerBase
 {
     private readonly GetCarByIdQueryHandler _getCarByIdQueryHandler;
     private readonly GetCarQueryHandler _getCarQueryHandler;
+    private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
     private readonly CreateCarCommandHandler _createCarCommandHandler;
     private readonly UpdateCarCommandHandler _updateCarCommandHandler;
     private readonly RemoveCarCommandHandler _removeCarCommandHandler;
 
-    public CarsController(GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, CreateCarCommandHandler createCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler)
+    public CarsController(GetCarByIdQueryHandler getCarByIdQueryHandler, GetCarQueryHandler getCarQueryHandler, CreateCarCommandHandler createCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler)
     {
         _getCarByIdQueryHandler = getCarByIdQueryHandler;
         _getCarQueryHandler = getCarQueryHandler;
+        _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
         _createCarCommandHandler = createCarCommandHandler;
         _updateCarCommandHandler = updateCarCommandHandler;
         _removeCarCommandHandler = removeCarCommandHandler;
@@ -29,6 +31,13 @@ public class CarsController : ControllerBase
     public async Task<IActionResult> CarList()
     {
         var datas = await _getCarQueryHandler.Handle();
+        return Ok(datas);
+    }
+    
+    [HttpGet("getCarWithBrandList")]
+    public async Task<IActionResult> GetCarWithBrandList()
+    {
+        var datas = await _getCarWithBrandQueryHandler.Handle();
         return Ok(datas);
     }
 
